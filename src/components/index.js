@@ -1,7 +1,6 @@
-import LandingPage from "./landingPages";
-import SearchPage from "./searchPage";
+import LandingPage from "./LandingPage";
+import CarsWeb from "./CarsWeb";
 import Protected from "./Protected";
+import Login from "./Login";
 
-
-
-export {LandingPage,SearchPage,Protected}
+export { LandingPage, CarsWeb, Protected, Login };

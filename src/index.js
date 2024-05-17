@@ -1,41 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import{
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom"
-import './index.css';
-import { LandingPage, SearchPage,Protected } from './components';
-import reportWebVitals from './reportWebVitals';
-import {createStore, compose, applyMiddleware} from 'redux'
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import reducers from './reducers'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import thunk from "redux-thunk";
+import reportWebVitals from "./reportWebVitals";
+import { LandingPage, CarsWeb, Protected, Login } from "./components";
+import reducers from "./reducers";
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)))
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          
-          <Route path='/' element={          
-                <LandingPage /> 
-          }></Route>
-
-          <Route path='/search' element={          
-            <Protected>
-                <SearchPage />
-            </Protected>
-          }></Route>
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="/formcar"
+        element={
+          <Protected>
+            <Provider store={store}>
+              <CarsWeb />
+            </Provider>
+          </Protected>
+        }
+      />
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
